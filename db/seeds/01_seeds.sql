@@ -8,11 +8,11 @@ INSERT INTO categories (category)
 VALUES 
 ('IT');
 
-INSERT INTO resources (title, url, description, user_id, category_id)
+INSERT INTO resources (title, url, description, url_cover_photo,user_id , category_id)
 VALUES
-('LHL page - 1', 'https://www.lighthouselabs.ca/en/web-development', 'Full Stack Development', 1, 1),
-('LHL page - 2', 'https://www.lighthouselabs.ca/en/data-science', 'Data Science', 1, 1),
-('LHL page - 3', 'https://www.lighthouselabs.ca/en/cyber-security', 'Cyber-security', 1, 1);
+('LHL page - 1', 'https://www.lighthouselabs.ca/en/web-development', 'fm', 'Full Stack Development', 1, 1),
+('LHL page - 2', 'https://www.lighthouselabs.ca/en/data-science', 'gm', 'Data Science', 1, 1),
+('LHL page - 3', 'https://www.lighthouselabs.ca/en/cyber-security', 'hom', 'Cyber-security', 1, 1);
 
 INSERT INTO feedbacks (comment, rating, user_id, resource_id)
 VALUES
