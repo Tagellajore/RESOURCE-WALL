@@ -6,7 +6,9 @@ VALUES
 
 INSERT INTO categories (category)
 VALUES
-('IT');
+('Dogs'),
+('Cats'),
+('Horses');
 
 INSERT INTO resources (title, url, description, url_cover_photo, user_id , category_id)
 VALUES
