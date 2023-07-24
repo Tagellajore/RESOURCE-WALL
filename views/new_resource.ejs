@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home Page</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script defer src="/scripts/app.js"></script>
+  </head>
+<body>
+  <%- include('partials/_header.ejs') %>
+  <main id="main-container">
+    <section id="section-container">
+      <article>
+        <h2>Create New Resource</h2>
+        <form id="add-resource" method="POST" action="/resources/new">
+          <fieldset>
+            <label for="title">Title:</label>
+            <div></div>
+            <input id="title" type="text" name="title" placeholder="Enter resource title..."/>
+          </fieldset>
+          <fieldset>
+            <label for="url">URL:</label>
+            <div></div>
+            <input id="url" type="text" name="url" placeholder="Add URL https://" />
+          <fieldset>
+             <label for="url">Cover Image:</label>
+            <div></div>
+            <input id="url" type="text" name="url" placeholder="Add Image URL https://" />
+          </fieldset>
+          <fieldset>
+            <label for="description">Description:</label>
+            <div></div>
+            <textarea id="description" type="text" name="description" placeholder="Add description..."></textarea>
+          </fieldset>
+          <div>
+            <label for="search">Select Category</label>
+            <select id="search-dropdown" name="search-dropdown">
+            <option value="dogs">Dogs</option>
+            <option value="cats">Cats</option>
+            <option value="horses">Horses</option>
+            <option value="birds">Birds</option>
+          </select>
+          </div>
+          <div class="alignRight">
+            <button type="button">Cancel</button>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
