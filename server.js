@@ -103,6 +103,11 @@ app.get('/resources', async (req, res) => {
  }
 });
 
+// Add new resources 
+app.get('/resources/new', (req, res) => {
+  res.render("new");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
