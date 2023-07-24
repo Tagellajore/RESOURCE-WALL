@@ -6,6 +6,7 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 const db = require('./db/connection');
+const cookieSession = require("cookie-session");
 //const routes = require('./routes');
 
 const PORT = process.env.PORT || 8080;
@@ -28,6 +29,14 @@ app.use(
   })
 );
 app.use(express.static('public'));
+
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key"],
+  })
+);
+
 //app.use(routes(db));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
