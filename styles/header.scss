@@ -1,11 +1,12 @@
 nav {
   display: flex;
   justify-content: space-between;
-  height: 100px;
-  width: 100%;
-  background-color: teal;
-  color: white;
+  height: 50px;
+  width: 100vw;
+  background-color: #43b3ae;
+  color: black;
   padding-top: 20px;
+  font-size: 20px;
 }
 
 .title {
@@ -18,18 +19,24 @@ nav {
   color: black;
 }
 
-/* for main
+/* for main.ejs
+
+body {
+  background-color: white;
+}
+
 .main-wrapper {
   display: flex;
   justify-content: center;
   font-size: 30px;
-  padding: 30px;
+  padding: 50px;
 }
 
 .card-wrapper {
   display: flex;
   justify-content: space-around;
   width: 100vw;
+  padding-top: 30px;
 }
 .item-cards {
   display:flex;
@@ -38,4 +45,10 @@ nav {
 
 .item-image img {
   width: 200px;
+  border-radius: 15%;
+}
+
+.item-title {
+  display:flex;
+  justify-content: center;
 }
