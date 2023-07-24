@@ -74,6 +74,35 @@ app.get('/', (req, res) => {
   res.render("index");
 });
 
+app.get('/', (req, res) => {
+  res.render("users");
+}); 
+
+// Get  resource
+app.get('/resources', async (req, res) => {
+  const { user_id } = req.session; // check cookies
+  if (!user_id) {
+    return res.redirect('/');
+  }
+  
+  try {
+  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]);
+  if(!validUser) {
+    return res.redirect("/")
+  }
+
+  const resources = await db.query(`SELECT * FROM resources;`);
+  const templateVars = {
+   user: validUser.rows[0],
+   resources: resources.rows
+  };
+  // console.log(templateVars);
+  return res.render("resources", templateVars);
+  } catch (error) {
+    return res.status(400).send({ message: error.message });
+ }
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
