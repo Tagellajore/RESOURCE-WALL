@@ -58,7 +58,17 @@ app.use('/api/resources', resourcesApiRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+// login route
+// do this instead
+app.get('/login/:id', (req, res) => {
+  // using encrypted cookies
+  req.session.user_id = req.params.id;
 
+  // console.log(req.params.id);
+
+  // send the user somewhere
+  res.redirect('/resources');
+});
 
 app.get('/', (req, res) => {
   res.render("index");
