@@ -8,8 +8,22 @@
 const express = require('express');
 const router  = express.Router();
 
-router.get('/', (req, res) => {
-  res.render('users');
-}); 
+module.exports = (db) => {
+// router.get('/users', (req, res) => {
+//   res.render('users');
+// }); 
 
-module.exports = router;
+// // // Add new resources 
+// // router.get('/resources/new', (req, res) => {
+// //    res.render("new");
+// // });
+
+// // router.post('/resources/new', (req, res) => {
+// //   console.log(req.body);
+
+
+// //  res.redirect('/')
+// // });
+
+  return router;
+}
