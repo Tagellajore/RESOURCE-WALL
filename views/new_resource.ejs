@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Home Page</title>
+  <title>Create New Resource</title>
 
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -12,10 +12,12 @@
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/header.css" />
+  <link rel="stylesheet" href="/styles/new_resource.css" />
 
     <script src="/vendor/jquery-3.0.0.js"></script>
     <script defer src="/scripts/app.js"></script>
-  </head>
+</head>
+
 <body>
   <%- include('partials/_header.ejs') %>
   <main id="main-container">
@@ -42,18 +44,18 @@
             <div></div>
             <textarea id="description" type="text" name="description" placeholder="Add description..."></textarea>
           </fieldset>
-          <div>
-            <label for="search">Select Category</label>
-            <select id="search-dropdown" name="search-dropdown">
-            <option value="dogs">Dogs</option>
-            <option value="cats">Cats</option>
-            <option value="horses">Horses</option>
-            <option value="birds">Birds</option>
-          </select>
+          <div id="select-category">
+            <label for="select-category">Select Category</label>
+              <select id="select-dropdown" name="select-dropdown">
+                <option value="dogs">Dogs</option>
+                <option value="cats">Cats</option>
+                <option value="horses">Horses</option>
+                <option value="birds">Birds</option>
+              </select>
           </div>
-          <div class="alignRight">
+          <div class="button">
             <button type="button">Cancel</button>
-            <button type="submit">Submit</button>
+            <button id="margin-submit" type="submit">Submit</button>
           </div>
         </form>
       </article>
