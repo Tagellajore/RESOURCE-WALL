@@ -103,6 +103,7 @@ app.get('/resources', async (req, res) => {
  }
 });
 
+
 // Get a single user profile 
 app.get('/users/:id', async (req, res) => {
   const { user_id } = req.session;
@@ -125,10 +126,40 @@ app.get('/users/:id', async (req, res) => {
   }
 });
 
-// // update user info 
-// app.post('/users/edit/:id', )
+// update user info 
+app.post('/users/edit/:id', async (req, res) => {
+  const { user_id } = req.session;
+  if (!user_id) {
+    return res.status(400).send("You need to be logged in!");
+  }
+  
+  const { id } = req.params;
 
-// Add new resources 
+  try {
+    if (user_id === id) {
+       const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]);
+       if (validUser.rows.length === 0) {
+         return res.redirect("/");
+       }
+    }
+
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+      return res.status(400)
+      .send("You need to fill the name, email or password!");
+    }
+    
+    await db.query(
+      `UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4;`,
+      [name, email, password, id]
+    );
+    return res.redirect(`/users/${id}`)
+  } catch (error) {
+    return res.status(500).send("Internal server error")
+  }
+})
+
+// Add new resources page
 app.get('/resources/new', (req, res) => {
   res.render("new");
 });

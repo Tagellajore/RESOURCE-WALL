@@ -15,7 +15,7 @@
         <p>Email: <%= profile.email %></p>
         <p>Password: <%= profile.password %></p> 
       </div>
-      <!-- <form action="users/edit/<%= profile.id %>" method="POST">
+      <form action="/users/edit/<%= profile.id %>" method="POST">
         <label for="">Name</label>
         <input type="text" name="name">
         <br>
@@ -26,7 +26,7 @@
         <input type="text" name="password">
         <br>
         <button type="Submit">Update</button>
-      </form> -->
+      </form>
       <%}%>
   </div>
 </body>
