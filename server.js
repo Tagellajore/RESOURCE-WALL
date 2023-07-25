@@ -67,7 +67,7 @@ app.get('/login/:id', (req, res) => {
   // console.log(req.params.id);
 
   // send the user somewhere
-  res.redirect('/resources');
+  res.redirect('/');
 });
 
 app.get('/', (req, res) => {
@@ -78,7 +78,7 @@ app.get('/', (req, res) => {
   res.render("users");
 }); 
 
-// Get  resource
+// Get  resources
 app.get('/resources', async (req, res) => {
   const { user_id } = req.session; // check cookies
   if (!user_id) {
@@ -102,6 +102,31 @@ app.get('/resources', async (req, res) => {
     return res.status(400).send({ message: error.message });
  }
 });
+
+// Get a single user profile 
+app.get('/users/:id', async (req, res) => {
+  const { user_id } = req.session;
+  if (!user_id) {
+    return res.redirect("/");
+  }
+
+  const rId = req.params.id
+  if (user_id === rId) {
+    try {
+      const profile = await db.query(`SELECT * FROM users WHERE id = $1`, [rId])
+      const templateVars = {
+        profile: profile.rows[0]
+      };
+      // console.log(templateVars)
+      return res.render('profile', templateVars);
+  } catch (error) {
+    return res.status(500).send("Internal server error")
+  }
+  }
+});
+
+// // update user info 
+// app.post('/users/edit/:id', )
 
 // Add new resources 
 app.get('/resources/new', (req, res) => {
