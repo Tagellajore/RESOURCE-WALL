@@ -3,29 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Create New Resource</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+  <link rel="stylesheet" href="/styles/new_resource.css" />
+
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script defer src="/scripts/app.js"></script>
 </head>
+
 <body>
-  <h1>Create new Resources</h1>
-  <div>
-    <form action="/resources/new" method="POST">
-     <label for="">Title</label>
-     <input type="text" name="title">
-     <br>
-     <label for="">Category</label>
-     <input type="text" name="category">
-     <br>
-     <label for="">Url</label>
-     <input type="text" name="url">
-     <br>
-     <label for="">Resource Cover Image</label>
-     <input type="text" name="url_cover_photo">
-     <br>
-     <label for="">Description</label>
-     <input type="text" name="description">
-     <br>
-     <button type="submit">Submit</button>
-    </form>
-  </div>
+  <%- include('partials/_header.ejs') %>
+  <main id="main-container">
+    <section id="section-container">
+      <article>
+        <h2>Create New Resource</h2>
+        <form id="add-resource" method="POST" action="/resources/new">
+          <fieldset>
+            <label for="title">Title:</label>
+            <div></div>
+            <input id="title" type="text" name="title" placeholder="Enter resource title..."/>
+          </fieldset>
+          <fieldset>
+            <label for="url">URL:</label>
+            <div></div>
+            <input id="url" type="text" name="url" placeholder="Add URL https://" />
+          <fieldset>
+             <label for="url">Cover Image:</label>
+            <div></div>
+            <input id="url" type="text" name="url" placeholder="Add Image URL https://" />
+          </fieldset>
+          <fieldset>
+            <label for="description">Description:</label>
+            <div></div>
+            <textarea id="description" type="text" name="description" placeholder="Add description..."></textarea>
+          </fieldset>
+          <div id="select-category">
+            <label for="select-category">Select Category</label>
+              <select id="select-dropdown" name="select-dropdown">
+                <option value="dogs">Dogs</option>
+                <option value="cats">Cats</option>
+                <option value="horses">Horses</option>
+                <option value="birds">Birds</option>
+              </select>
+          </div>
+          <div class="button">
+            <button type="button">Cancel</button>
+            <button id="margin-submit" type="submit">Submit</button>
+          </div>
+        </form>
+      </article>
+    </section>
+  </main>
 </body>
 </html>
+

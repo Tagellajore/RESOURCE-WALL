@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -29,5 +29,57 @@
       </form>
       <%}%>
   </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My Profile</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+  <link rel="stylesheet" href="/styles/profile.css" />
+
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script defer src="/scripts/app.js"></script>
+</head>
+
+<body>
+  <%- include('partials/_header.ejs') %>
+  <main id="main-container">
+    <section id="section-container">
+      <article>
+        <h2>My Profile</h2>
+        <form id="profile-form" method="POST" action="/users/<%= user.id %>">
+          <fieldset>
+            <label for="name">Name:</label>
+            <div></div>
+            <input id="title" type="text" name="name" value="<%= user.name %>"/>
+          </fieldset>
+          <fieldset>
+            <label for="email">Email:</label>
+            <div></div>
+            <input id="email" type="text" name="email" value="<%= user.email %>" />
+          </fieldset>
+          <fieldset>
+             <label for="password">Password:</label>
+            <div></div>
+            <input id="password" type="text" name="password" />
+          </fieldset>
+          <div class="button">
+            <button id="margin-update" type="submit">Update</button>
+          </div>
+        </form>
+      </article>
+    </section>
+  </main>
 </body>
 </html>

@@ -70,153 +70,71 @@ app.get('/login/:id', (req, res) => {
   res.redirect('/');
 });
 
-app.get('/', (req, res) => {
-  res.render("index");
+// logout ???
+
+
+app.get('/', async (req, res) => {
+  const { user_id } = req.session; // check cookies
+  if (!user_id) {
+    return res.status(400).send({ message: error.message });
+  }
+  
+  try {
+  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); //  
+  if(!validUser) {
+    return res.status(400).send({ message: error.message });
+  }
+
+  const resources = await db.query(`SELECT * FROM resources Limit 3;`);
+  
+  const templateVars = {
+   user: validUser.rows[0],
+   resources: resources.rows
+  };
+  console.log(templateVars);
+  return res.render("index", templateVars);
+  } catch (error) {
+    return res.status(400).send({ message: error.message });
+ }
 });
 
 app.get('/', (req, res) => {
   res.render("users");
 }); 
 
-// // Get  all resources --- resources created by a single user
-app.get("/resources", async (req, res) => {
-  const { user_id } = req.session; // check cookies
-  if (!user_id) {
-    return res.redirect('/');
-  }
+// // Add new resources page
+// app.get('/resources/new', (req, res) => {
+//   res.render("new");
+// });
+
+// // Adding new resources 
+// app.post('/resources/new', async (req, res) => {
+//   console.log(req.body);
+//   // const title = req.body.title;
+//   const { user_id } = req.session;
+//   if (!user_id) {
+//     return res.status(400).send('You need to be logged in')
+//   }
+
+//   try {
+//     const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id])
   
-  try {
-  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); //  
-  if(!validUser) {
-    return res.redirect("/")
-  }
-
-  const resources = await db.query(`SELECT * FROM resources;`);
+//     if (!validUser) {
+//        return res.redirect('/');
+//     }
+//   const { title, url, url_cover_photo, description } = req.body;
   
-  const templateVars = {
-   user: validUser.rows[0],
-   resources: resources.rows
-  };
-  // console.log(templateVars);
-  return res.render("resources", templateVars);
-  } catch (error) {
-    return res.status(400).send({ message: error.message });
- }
-});
-
-// Get  Myresources(created by a single user)
-app.get('/myresources', async (req, res) => {
-  const { user_id } = req.session; // check cookies
-  if (!user_id) {
-    return res.redirect('/');
-  }
-  
-  try {
-  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); // check id with the database id
-  if(!validUser) {
-    return res.redirect("/")
-  }
-   
-  const resources = await db.query(`SELECT * FROM resources WHERE user_id = $1;`, [validUser.rows[0].id]);
-  const templateVars = {
-   user: validUser.rows[0],
-   resources: resources.rows
-  };
-  // console.log(templateVars);
-  return res.render("myresources", templateVars);
-  } catch (error) {
-    return res.status(400).send({ message: error.message });
- }
-});
-
-// Get a single user profile 
-app.get('/users/:id', async (req, res) => {
-  const { user_id } = req.session;
-  if (!user_id) {
-    return res.redirect("/");
-  }
-
-  const rId = req.params.id
-  if (user_id === rId) {
-    try {
-      const profile = await db.query(`SELECT * FROM users WHERE id = $1`, [rId])
-      const templateVars = {
-        profile: profile.rows[0]
-      };
-      // console.log(templateVars)
-      return res.render('profile', templateVars);
-  } catch (error) {
-    return res.status(500).send("Internal server error")
-  }
-  }
-});
-
-// update user info 
-app.post('/users/edit/:id', async (req, res) => {
-  const { user_id } = req.session;
-  if (!user_id) {
-    return res.status(400).send("You need to be logged in!");
-  }
-  
-  const { id } = req.params;
-
-  try {
-    if (user_id === id) {
-       const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]);
-       if (validUser.rows.length === 0) {
-         return res.redirect("/");
-       }
-    }
-
-    const { name, email, password } = req.body;
-    if (!name || !email || !password) {
-      return res.status(400)
-      .send("You need to fill the name, email or password!");
-    }
-    
-    await db.query(
-      `UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4;`,
-      [name, email, password, id]
-    );
-    return res.redirect(`/users/${id}`)
-  } catch (error) {
-    return res.status(500).send("Internal server error")
-  }
-})
-
-// Add new resources page
-app.get('/resources/new', (req, res) => {
-  res.render("new");
-});
-
-// Adding new resources 
-app.post('/resources/new', async (req, res) => {
-  console.log(req.body);
-  // const title = req.body.title;
-  const { user_id } = req.session;
-  if (!user_id) {
-    return res.status(400).send('You need to be logged in')
-  }
-
-  try {
-    const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id])
-  
-    if (!validUser) {
-       return res.redirect('/');
-    }
-  const { title, url, url_cover_photo, description } = req.body;
-  
-  if (!title || !url || !url_cover_photo || !description) {
-    return res.status(400)
-    .send("You need to fill title, category, url, url_cover_photo or description fields");
-  }
-  await db.query(`INSERT INTO resources (title, url, url_cover_photo, description, user_id, category_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`, 
-  [title, url, url_cover_photo, description, user_id, 2]);
-  return res.redirect("/resources");
-  } catch (error) {
-    return res.status(400).send( { message: error.message } )
-  }
-});
+//   if (!title || !url || !url_cover_photo || !description) {
+//     return res.status(400)
+//     .send("You need to fill title, category, url, url_cover_photo or description fields");
+//   }
+//   await db.query(`INSERT INTO resources (title, url, url_cover_photo, description, user_id, category_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`, 
+//   [title, url, url_cover_photo, description, user_id, 2]);
+//   return res.redirect("/");
+//   } catch (error) {
+//     return res.status(400).send( { message: error.message } )
+//   }
+// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

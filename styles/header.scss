@@ -1,0 +1,21 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  width: 100vw;
+  background-color: #43b3ae;
+  color: black;
+  padding-top: 25px;
+  font-size: 20px;
+}
+
+.title {
+  color: white;
+  font-size: 30px;
+  padding-left: 30px;
+}
+
+.nav-items a {
+  color: black;
+  padding-right: 18px;
+}
