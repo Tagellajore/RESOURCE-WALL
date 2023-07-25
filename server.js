@@ -78,20 +78,21 @@ app.get('/', (req, res) => {
   res.render("users");
 }); 
 
-// Get  resources
-app.get('/resources', async (req, res) => {
+// // Get  all resources --- resources created by a single user
+app.get("/resources", async (req, res) => {
   const { user_id } = req.session; // check cookies
   if (!user_id) {
     return res.redirect('/');
   }
   
   try {
-  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]);
+  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); //  
   if(!validUser) {
     return res.redirect("/")
   }
 
   const resources = await db.query(`SELECT * FROM resources;`);
+  
   const templateVars = {
    user: validUser.rows[0],
    resources: resources.rows
@@ -103,6 +104,30 @@ app.get('/resources', async (req, res) => {
  }
 });
 
+// Get  Myresources(created by a single user)
+app.get('/myresources', async (req, res) => {
+  const { user_id } = req.session; // check cookies
+  if (!user_id) {
+    return res.redirect('/');
+  }
+  
+  try {
+  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); // check id with the database id
+  if(!validUser) {
+    return res.redirect("/")
+  }
+   
+  const resources = await db.query(`SELECT * FROM resources WHERE user_id = $1;`, [validUser.rows[0].id]);
+  const templateVars = {
+   user: validUser.rows[0],
+   resources: resources.rows
+  };
+  // console.log(templateVars);
+  return res.render("myresources", templateVars);
+  } catch (error) {
+    return res.status(400).send({ message: error.message });
+ }
+});
 
 // Get a single user profile 
 app.get('/users/:id', async (req, res) => {
