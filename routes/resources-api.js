@@ -37,29 +37,6 @@ router.get("/", async (req, res) => {
  }
 });
 
-// Get a single resource ... not completed
-router.get('/:id', async (req, res) => {
-  const { user_id } = req.session;
-  if (!user_id) {
-    return res.redirect("/");
-  }
-
-  const rId = req.params.id
-  if (user_id === rId) {
-    try {
-      const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]);
-      const profile = await db.query(`SELECT * FROM users WHERE id = $1`, [rId])
-      const templateVars = {
-        user: validUser.rows[0],
-        profile: profile.rows[0]
-      };
-      console.log(templateVars)
-      return res.render('profile', templateVars);
-  } catch (error) {
-    return res.status(500).send("Internal server error")
-  }
-  }
-});
 
 // Get  Myresources(created by a single user) and resources liked by me
 router.get('/myresources', async (req, res) => {
@@ -69,28 +46,67 @@ router.get('/myresources', async (req, res) => {
   }
   
   try {
-  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); // check id with the database id
-  if(!validUser) {
-    return res.redirect("/")
-  }
-   
-  const resources = await db.query(`SELECT * FROM resources WHERE user_id = $1;`, [validUser.rows[0].id]);
-  const likes = await db.query(`SELECT * FROM likes JOIN resources ON resource_id = resources.id WHERE likes.user_id = $1`, [ user_id ]);
-  const templateVars = {
-   user: validUser.rows[0],
-   resources: resources.rows,
-   likes: likes.rows
+    const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); // check id with the database id
+    console.log(validUser);
+    if(!validUser) {
+        return res.redirect("/")
+      }
+      
+      const resources = await db.query(`SELECT * FROM resources WHERE user_id = $1;`, [validUser.rows[0].id]);
+      const likes = await db.query(`SELECT * FROM likes JOIN resources ON resource_id = resources.id WHERE likes.user_id = $1`, [ user_id ]);
+      const templateVars = {
+         user: validUser.rows[0],
+         resources: resources.rows,
+         likes: likes.rows
   };
   console.log(templateVars);
   return res.render("myresources", templateVars);
-  } catch (error) {
-    return res.status(400).send({ message: error.message });
- }
+} catch (error) {
+  return res.status(400).send({ message: error.message });
+}
 });
 
 // Add new resources page
-router.get('/new', (req, res) => {
-  res.render("new");
+router.get('/new', async (req, res) => {
+  const { user_id } = req.session; // check cookies
+  if (!user_id) {
+    return res.send('You need to login first');
+  }
+
+try {
+    const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); // check id with the database id
+    console.log(validUser);
+    if(!validUser) {
+        return res.send("You are not allowed to be here!")
+      }
+
+    const templateVars = {
+      user: validUser.rows[0],
+    };
+      res.render("new", templateVars);
+    } catch (error) {
+   return res.status(400).send({ message: error.message });
+  }
+});
+
+// Get a single resource
+router.get('/:id', async (req, res) => {
+  const { user_id } = req.session;
+  if (!user_id) {
+    return res.send("You are not allowed to access this resource");
+  }
+
+  const rId = req.params.id
+    try {
+      const singleResource = await db.query(`SELECT * FROM resources WHERE id = $1`, [rId])
+      const templateVars = {
+        singleResource: singleResource.rows[0]
+      };
+      console.log(templateVars)
+      return res.render('singleResource', templateVars);
+  } catch (error) {
+    return res.status(500).send("Internal server error")
+  }
 });
 
 // Adding new resources 
