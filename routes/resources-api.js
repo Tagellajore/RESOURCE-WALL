@@ -37,6 +37,30 @@ router.get("/", async (req, res) => {
  }
 });
 
+// // Get a single resource ... not completed
+// router.get('/:id', async (req, res) => {
+//   const { user_id } = req.session;
+//   if (!user_id) {
+//     return res.redirect("/");
+//   }
+
+//   const rId = req.params.id
+//   if (user_id === rId) {
+//     try {
+//       const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]);
+//       const profile = await db.query(`SELECT * FROM users WHERE id = $1`, [rId])
+//       const templateVars = {
+//         user: validUser.rows[0],
+//         profile: profile.rows[0]
+//       };
+//       console.log(templateVars)
+//       return res.render('profile', templateVars);
+//   } catch (error) {
+//     return res.status(500).send("Internal server error")
+//   }
+//   }
+// });
+
 // Get  Myresources(created by a single user) and resources liked by me
 router.get('/myresources', async (req, res) => {
   const { user_id } = req.session; // check cookies
