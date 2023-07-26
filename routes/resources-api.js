@@ -17,15 +17,15 @@ router.get("/", async (req, res) => {
   if (!user_id) {
     return res.send("You need to login first");
   }
-  
+
   try {
-  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); //  
+  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); //
   if(!validUser) {
     return res.redirect("/")
   }
 
   const resources = await db.query(`SELECT * FROM resources Limit 3;`);
-  
+
   const templateVars = {
    user: validUser.rows[0],
    resources: resources.rows
@@ -44,14 +44,14 @@ router.get('/myresources', async (req, res) => {
   if (!user_id) {
     return res.redirect('/');
   }
-  
+
   try {
     const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); // check id with the database id
     console.log(validUser);
     if(!validUser) {
         return res.redirect("/")
       }
-      
+
       const resources = await db.query(`SELECT * FROM resources WHERE user_id = $1;`, [validUser.rows[0].id]);
       const likes = await db.query(`SELECT * FROM likes JOIN resources ON resource_id = resources.id WHERE likes.user_id = $1`, [ user_id ]);
       const templateVars = {
@@ -109,7 +109,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Adding new resources 
+// Adding new resources
 router.post('/new', async (req, res) => {
   console.log(req.body);
   // const title = req.body.title;
@@ -120,17 +120,17 @@ router.post('/new', async (req, res) => {
 
   try {
     const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id])
-  
+
     if (!validUser) {
        return res.redirect('/');
     }
   const { title, url, url_cover_photo, description } = req.body;
-  
+
   if (!title || !url || !url_cover_photo || !description) {
     return res.status(400)
     .send("You need to fill title, category, url, url_cover_photo or description fields");
   }
-  await db.query(`INSERT INTO resources (title, url, url_cover_photo, description, user_id, category_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`, 
+  await db.query(`INSERT INTO resources (title, url, url_cover_photo, description, user_id, category_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
   [title, url, url_cover_photo, description, user_id, 2]);
   return res.redirect("/");
   } catch (error) {
@@ -138,10 +138,32 @@ router.post('/new', async (req, res) => {
   }
 });
 
-// for making post request on drop down 
-router.post('/:id', async (req, res) => {
-  const id = req.params.id;
+// for making post request on drop down
+router.post('/category', async (req, res) => {
+  const id = req.body.categoryId;
+  const { user_id } = req.session; // check cookies
+  if (!user_id) {
+    return res.send("You need to login first");
+  }
+
+  try {
+  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); //
+  if(!validUser) {
+    return res.redirect("/")
+  }
+
+  const resources = await db.query(`SELECT * FROM resources Where category_id =$1;`, [id]);
+
+  const templateVars = {
+   user: validUser.rows[0],
+   resources: resources.rows
+  };
+  console.log(templateVars);
+  return res.render("index", templateVars);
   console.log(id);
+  }catch (error) {
+    return res.status(400).send({ message: error.message });
+}
 });
 
 

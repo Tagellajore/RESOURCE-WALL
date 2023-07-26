@@ -4,12 +4,13 @@
       <a class="title" href="http://localhost:8080/api/resources">Resource Wall</a>
     </div>
     <div>
-      <form class="search search-nav"  action="/resources/id" method="POST">
+      <form class="search search-nav"  action="/api/resources/category" method="POST">
         <label for="search">Search</label>
-          <select id="search-dropdown" name="search-dropdown">
-            <option value="Dogs">Dogs</option>
-            <option value="Cats">Cats</option>
-            <option value="Horses">Horses</option>
+          <select id="search-dropdown" name="categoryId">
+            <option disabled selected>Choose Category</option>
+            <option value="1">Dogs</option>
+            <option value="2">Cats</option>
+            <option value="3">Horses</option>
           </select>
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>

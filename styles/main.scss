@@ -18,10 +18,14 @@ body {
   padding-top: 60px;
 }
 
+.main-layout {
+  display: flex;
+}
+
 .card-wrapper {
   display: flex;
   justify-content: space-around;
-  width: 100vw;
+  width: 33vw;
 }
 .item-cards {
   display:flex;

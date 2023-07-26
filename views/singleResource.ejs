@@ -3,17 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+  <link rel="stylesheet" href="/styles/single_resource.css" />
+
   <title>Document</title>
 </head>
 <body>
-  <h1>HELLO FROM SINGLE RESOURCE PAGE</h1>
+  <%- include('partials/_header.ejs') %>
+  <main id="main-container">
+    <section id="section-container">
+      <article>
+        <h2>"<%= resources.name %>"</h2>
+        <form id="profile-form" method="POST" action="/api/users/<%= user.id %>">
+          <fieldset>
+            <label for="url">url:</label>
+            <div id="form-divider"></div>
+            <input id="url" type="text" name="name" value="<%= user.name %>"/>
+          </fieldset>
+          <fieldset>
+            <label for="description">Description:</label>
+            <div id="form-divider"></div>
+            <input id="description" type="text" name="email" value="<%= user.email %>" />
+          </fieldset>
+          <fieldset>
+             <label for="comment">Comment:</label>
+            <div id="form-divider"></div>
+            <input id="comment" type="text" name="password" />
+          </fieldset>
+          <div id="select-category">
+            <label for="select-category">Rating</label>
+              <select id="select-dropdown" name="select-dropdown">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+          </div>
+          <div class="like">
+            <button id="margin-like" type="submit">Like</button>
+          </div>
+        </form>
+      </article>
+    </section>
+  </main>
 </body>
 </html>
 
-<!-- singl resource
-image
-title
-description
-like
-comment
-rating-->
+<!-- <div class="one">
+  <div>
+  <fieldset>
+    <label for="url">url:</label>
+    <div id="form-divider"></div>
+    <input id="url" type="text" name="name" value="<%= user.name %>"/>
+  </fieldset>
+  </div>
+  <label for="url">url:</label>
+    <div id="form-divider"></div>
+    <input id="url" type="text" name="name" value="<%= user.name %>"/>
+  <div>
+  </div>
+</div> -->
