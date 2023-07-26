@@ -1,36 +1,6 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-  </head>
-  <body>
-    <div>
-      <% if (profile) {%>
-        <div>
-          <h1>My Profile</h1>
-          <p>Id: <%= profile.id %></p>
-          <p>Name: <%= profile.name %></p>
-          <p>Email: <%= profile.email %></p>
-          <p>Password: <%= profile.password %></p>
-        </div>
-        <form action="/users/edit/<%= profile.id %>" method="POST">
-          <label for="">Name</label>
-          <input type="text" name="name">
-          <br>
-          <label for="">Email</label>
-          <input type="text" name="email">
-          <br>
-          <label for="">Password</label>
-          <input type="text" name="password">
-          <br>
-          <button type="Submit">Update</button>
-        </form>
-        <%}%>
-    </div>
-  </body>
-  </html> -->
   <title>My Profile</title>
 
   <meta charset="UTF-8" >
@@ -54,7 +24,7 @@
     <section id="section-container">
       <article>
         <h2>My Profile</h2>
-        <form id="profile-form" method="POST" action="/users/<%= user.id %>">
+        <form id="profile-form" method="POST" action="/api/users/<%= user.id %>">
           <fieldset>
             <label for="name">Name:</label>
             <div id="form-divider"></div>

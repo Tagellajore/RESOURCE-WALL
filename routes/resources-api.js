@@ -15,7 +15,7 @@ const db = require('../db/connection');
 router.get("/", async (req, res) => {
   const { user_id } = req.session; // check cookies
   if (!user_id) {
-    return res.redirect('/');
+    return res.send("You need to login first");
   }
   
   try {
@@ -30,14 +30,14 @@ router.get("/", async (req, res) => {
    user: validUser.rows[0],
    resources: resources.rows
   };
-  console.log(templateVars);
+  // console.log(templateVars);
   return res.render("index", templateVars);
   } catch (error) {
     return res.status(400).send({ message: error.message });
  }
 });
 
-// Get  Myresources(created by a single user) and 
+// Get  Myresources(created by a single user) and resources liked by me
 router.get('/myresources', async (req, res) => {
   const { user_id } = req.session; // check cookies
   if (!user_id) {
@@ -98,7 +98,7 @@ router.post('/new', async (req, res) => {
   }
 });
 
-
+// for making post request on drop down 
 router.post('/:id', async (req, res) => {
   const id = req.params.id;
   console.log(id);

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Resources</h1>
+  <div>
+  <% resources.forEach((resource) => { %>
+      <p>Title <%= resource.title%></p>
+      <p>url <%= resource.url%></p>
+      <p>description <%= resource.description%></p>
+      <p>Cover <%= resource.url_cover_photo%></p>
+      <%})%>
+    </div>
+    <div>
+      <% likes.forEach((like) => { %>
+        <p>Title <%= like.title%></p>
+        <p>url <%= like.url%></p>
+        <p>description <%= like.description%></p>
+        <p>Cover <%= like.url_cover_photo%></p>
+      <% })%>
+    </div>
+</body>
+</html>
+﻿

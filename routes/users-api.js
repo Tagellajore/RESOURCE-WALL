@@ -10,18 +10,6 @@ const router  = express.Router();
 const userQueries = require('../db/queries/users');
 const db = require('../db/connection');
 
-// router.get('/', (req, res) => {
-//   userQueries.getUsers()
-//     .then(users => {
-//       res.json({ users });
-//     })
-//     .catch(err => {
-//       res
-//         .status(500)
-//         .json({ error: err.message });
-//     });
-// });
-
 // Get a single user profile 
 router.get('/:id', async (req, res) => {
   const { user_id } = req.session;
@@ -38,7 +26,7 @@ router.get('/:id', async (req, res) => {
         user: validUser.rows[0],
         profile: profile.rows[0]
       };
-      // console.log(templateVars)
+      console.log(templateVars)
       return res.render('profile', templateVars);
   } catch (error) {
     return res.status(500).send("Internal server error")
@@ -78,4 +66,5 @@ router.post('/users/edit/:id', async (req, res) => {
     return res.status(500).send("Internal server error")
   }
 })
+
 module.exports = router;

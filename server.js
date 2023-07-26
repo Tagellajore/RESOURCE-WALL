@@ -9,7 +9,7 @@ const db = require('./db/connection');
 const cookieSession = require("cookie-session");
 //const routes = require('./routes');
 
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -67,44 +67,15 @@ app.get('/login/:id', (req, res) => {
   // console.log(req.params.id);
 
   // send the user somewhere
-  res.redirect('/');
+  res.redirect('/api/resources');
 });
 
-// logout ???
+// logout
 app.get('/logout', (req, res) => {
   req.session = null;
 
   res.send("Successfully Logged Out!");
 });
-
-app.get('/', async (req, res) => {
-  const { user_id } = req.session; // check cookies
-  if (!user_id) {
-    return res.status(400).send('Not allowed to be here');
-  }
-  
-  try {
-  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); //  
-  if(!validUser) {
-    return res.status(400).send('Not allowed to be here');
-  }
-
-  const resources = await db.query(`SELECT * FROM resources Limit 3;`);
-  
-  const templateVars = {
-   user: validUser.rows[0],
-   resources: resources.rows
-  };
-  console.log(templateVars);
-  return res.render("index", templateVars);
-  } catch (error) {
-    return res.status(400).send({ message: error.message });
- }
-});
-
-app.get('/', (req, res) => {
-  res.render("users");
-}); 
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
