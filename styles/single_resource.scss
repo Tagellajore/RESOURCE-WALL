@@ -1,0 +1,69 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+#main-container {
+   width: 40%;
+   height: 520px;
+   background-color: teal;
+   border-radius: 11%;
+}
+
+#section-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+article {
+   padding-top: 25px;
+   font-size: 16px;
+   width: 65%;
+}
+
+h2 {
+   font-size: 30px;
+   text-align-last: center;
+}
+
+#profile-form {
+   padding-top: 25px;
+   font-size: 20px;
+}
+
+#form-divider {
+  padding-top: 10px;
+}
+
+#title {
+   width: 100%;
+   padding-top: 8px;
+}
+
+#email {
+   width: 100%;
+   padding-top: 8px;
+}
+
+#password {
+   width: 100%;
+   padding-top: 8px;
+}
+
+fieldset {
+   padding-top: 15px;
+}
+
+.button {
+  padding-top: 18px;
+  display: flex;
+  justify-content: end;
+  font-size: 22px;
+}
+
+#margin-update {
+   margin-left: 10px;
+}
