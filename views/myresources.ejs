@@ -3,22 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/header.css" />
+  <link rel="stylesheet" href="/styles/myresources.css" />
+
+  <title>My Resources</title>
 </head>
-<body>
-  <h1>Resources</h1>
-  <div>
-  <% resources.forEach((resource) => { %>
-      <p>Title <%= resource.title%></p>
-      <p>Cover <%= resource.url_cover_photo%></p>
-      <%})%>
+<body id="myresources">
+  <%- include('partials/_header.ejs') %>
+  <h1>Resources Created by Me</h1>
+    <div class="layout">
+    <% resources.forEach((resource) => { %>
+      <div id="me">
+        <img src="<%= resource.url_cover_photo %>">
+        <p><%= resource.title %></p>
+      </div>
+    <%})%>
     </div>
-    <div>
-      <% likes.forEach((like) => { %>
-        <p>Title <%= like.title%></p>
-        <p>Cover <%= like.url_cover_photo%></p>
-      <% })%>
+  <h1>Resources Liked by Me</h1>
+    <div div class="layout">
+    <% likes.forEach((like) => { %>
+      <div id="me">
+        <img src="<%= like.url_cover_photo%>">
+        <p><%= like.title%></p>
+      </div>
+    <% })%>
     </div>
 </body>
 </html>
 ﻿
+
