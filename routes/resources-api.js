@@ -10,17 +10,6 @@ const router  = express.Router();
 const resourceQueries = require('../db/queries/resources');
 const db = require('../db/connection');
 
-// router.get('/', (req, res) => {
-//   resourceQueries.getResources()
-//     .then(resources => {
-//       res.json({ resources });
-//     })
-//     .catch(err => {
-//       res
-//         .status(500)
-//         .json({ error: err.message });
-//     });
-// });
 
 // // Get  all resources --- resources created by a single user
 router.get("/", async (req, res) => {
