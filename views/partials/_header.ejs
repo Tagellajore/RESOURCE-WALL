@@ -1,7 +1,7 @@
 <header>
   <nav>
     <div class="navbar">
-      <a class="title" href="../index.ejs">Resource Wall</a>
+      <a class="title">Resource Wall</a>
     </div>
     <div>
       <form class="search search-nav"  action="/resources/id" method="POST">
@@ -15,7 +15,7 @@
       </form>
     </div>
     <div class="nav-items">
-      <a class="" href="/api/resources//myresources">My Resources</a>
+      <a class="nav-font" href="/api/resources/myresources">My Resources</a>
       <a class="" href="/api/resources/new">Create New Resource</a>
       <a class="" href="/api/users/<%= user.id %>">My Profile</a>
       <a class="" href="/logout">Logout</a>

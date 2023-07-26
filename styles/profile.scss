@@ -7,8 +7,10 @@ body {
 
 #main-container {
    width: 40%;
-   height: 300px;
+   height: 520px;
    background-color: teal;
+   margin-top: 80px;
+   border-radius: 11%;
 }
 
 #section-container {
@@ -20,7 +22,7 @@ body {
 article {
    padding-top: 25px;
    font-size: 16px;
-   width: 60%;
+   width: 65%;
 }
 
 h2 {
@@ -29,29 +31,38 @@ h2 {
 }
 
 #profile-form {
-   padding-top: 30px;
+   padding-top: 25px;
+   font-size: 20px;
+}
+
+#form-divider {
+  padding-top: 10px;
 }
 
 #title {
    width: 100%;
+   padding-top: 8px;
 }
 
 #email {
    width: 100%;
+   padding-top: 8px;
 }
 
 #password {
    width: 100%;
+   padding-top: 8px;
 }
 
 fieldset {
-   padding-top: 10px;
+   padding-top: 15px;
 }
 
 .button {
   padding-top: 18px;
   display: flex;
   justify-content: end;
+  font-size: 22px;
 }
 
 #margin-update {

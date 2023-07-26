@@ -22,16 +22,19 @@
   <%- include('partials/_header.ejs') %>
   <div class="main-wrapper">
     <h1 class="Mainpage-heading">Looking to adopt furry angels?</h1>
-   </div>
-   <% resources.forEach((resource) => {%>
-   <div class="card-wrapper">
-     <div class="item-cards">
-       <div class="item-image">
-          <img src="<%= resource.url_cover_photo%>" loading="lazy" alt="dog image" >
+  </div>
+  <% resources.forEach((resource) => {%>
+  <div>
+    <div class="card-wrapper">
+      <div class="item-cards">
+        <div class="item-image">
+          <img src="<%= resource.url_cover_photo%>" loading="lazy" alt="animal image" >
           <a class="item-title" href="/resources/<%= resource.id %>"><%= resource.title %></a>
-       </div>
-   </div>
-   <%})%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%})%>
  </body>
 
 
