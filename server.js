@@ -9,7 +9,7 @@ const db = require('./db/connection');
 const cookieSession = require("cookie-session");
 //const routes = require('./routes');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -71,18 +71,22 @@ app.get('/login/:id', (req, res) => {
 });
 
 // logout ???
+app.get('/logout', (req, res) => {
+  req.session = null;
 
+  res.send("Successfully Logged Out!");
+});
 
 app.get('/', async (req, res) => {
   const { user_id } = req.session; // check cookies
   if (!user_id) {
-    return res.status(400).send({ message: error.message });
+    return res.status(400).send('Not allowed to be here');
   }
   
   try {
   const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); //  
   if(!validUser) {
-    return res.status(400).send({ message: error.message });
+    return res.status(400).send('Not allowed to be here');
   }
 
   const resources = await db.query(`SELECT * FROM resources Limit 3;`);
@@ -101,40 +105,6 @@ app.get('/', async (req, res) => {
 app.get('/', (req, res) => {
   res.render("users");
 }); 
-
-// // Add new resources page
-// app.get('/resources/new', (req, res) => {
-//   res.render("new");
-// });
-
-// // Adding new resources 
-// app.post('/resources/new', async (req, res) => {
-//   console.log(req.body);
-//   // const title = req.body.title;
-//   const { user_id } = req.session;
-//   if (!user_id) {
-//     return res.status(400).send('You need to be logged in')
-//   }
-
-//   try {
-//     const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id])
-  
-//     if (!validUser) {
-//        return res.redirect('/');
-//     }
-//   const { title, url, url_cover_photo, description } = req.body;
-  
-//   if (!title || !url || !url_cover_photo || !description) {
-//     return res.status(400)
-//     .send("You need to fill title, category, url, url_cover_photo or description fields");
-//   }
-//   await db.query(`INSERT INTO resources (title, url, url_cover_photo, description, user_id, category_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`, 
-//   [title, url, url_cover_photo, description, user_id, 2]);
-//   return res.redirect("/");
-//   } catch (error) {
-//     return res.status(400).send( { message: error.message } )
-//   }
-// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
