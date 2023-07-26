@@ -34,27 +34,23 @@
             <label for="title">Title:</label>
             <div></div>
             <input id="title" type="text" name="title" placeholder="Enter resource title..."/>
-          </fieldset>
-          <fieldset>
             <label for="url">URL:</label>
             <div></div>
             <input id="url" type="text" name="url" placeholder="Add URL https://" />
-          <fieldset>
-             <label for="url">Cover Image:</label>
+            <label for="url">Cover Image:</label>
             <div></div>
             <input id="url" type="text" name="url" placeholder="Add Image URL https://" />
-          </fieldset>
-          <fieldset>
             <label for="description">Description:</label>
             <div></div>
             <textarea id="description" type="text" name="description" placeholder="Add description..."></textarea>
           </fieldset>
           <div id="select-category">
             <label for="select-category">Select Category</label>
-              <select id="select-dropdown" name="select-dropdown">
-                <option value="dogs">Dogs</option>
-                <option value="cats">Cats</option>
-                <option value="horses">Horses</option>
+              <select id="select-dropdown" name="categoryId">
+                <option disabled selected>Choose Category</option>
+                <option value="1">Dogs</option>
+                <option value="2">Cats</option>
+                <option value="3">Horses</option>
               </select>
           </div>
           <div class="button">

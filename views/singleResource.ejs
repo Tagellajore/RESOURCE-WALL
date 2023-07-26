@@ -15,57 +15,33 @@
 </head>
 <body>
   <%- include('partials/_header.ejs') %>
-  <main id="main-container">
-    <section id="section-container">
-      <article>
-        <h2>"<%= resources.name %>"</h2>
-        <form id="profile-form" method="POST" action="/api/users/<%= user.id %>">
-          <fieldset>
-            <label for="url">url:</label>
-            <div id="form-divider"></div>
-            <input id="url" type="text" name="name" value="<%= user.name %>"/>
-          </fieldset>
-          <fieldset>
-            <label for="description">Description:</label>
-            <div id="form-divider"></div>
-            <input id="description" type="text" name="email" value="<%= user.email %>" />
-          </fieldset>
-          <fieldset>
-             <label for="comment">Comment:</label>
-            <div id="form-divider"></div>
-            <input id="comment" type="text" name="password" />
-          </fieldset>
-          <div id="select-category">
-            <label for="select-category">Rating</label>
-              <select id="select-dropdown" name="select-dropdown">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-          </div>
-          <div class="like">
-            <button id="margin-like" type="submit">Like</button>
-          </div>
-        </form>
-      </article>
+  <div class="one">
+    <div class="image-center">
+    <fieldset>
+      <img src="https://images.squarespace-cdn.com/content/v1/5538679ce4b07179e5b8a295/1675326874278-2BNDO82OTLMHBNJBZVC7/mexico2022-20220831-A51A6855.jpg?format=2500w">
+    </fieldset>
+    </div>
+    <section>
+       <div id="form-divider"></div>
+       <input class="single-form" type="text" name="name" value=" NAME "/>
+       <button id="margin-like" type="submit">Like</button>
+       <div id="form-divider"></div>
+       <input class="single-form" type="text" name="name" value="URL: <%= URL %>"/>
+       <div id="form-divider"></div>
+       <input class="single-form" type="text" name="name" value="<%= DESCRIPTION %>"/>
+       <div id="form-divider"></div>
+       <input class="single-form comments" type="text" name="name" value="<%= COMMENTS %>"/>
+       <label for="select-category">Rating</label>
+               <select id="select-dropdown" name="select-dropdown">
+                 <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option>
+                 <option value="4">4</option>
+                 <option value="5">5</option>
+               </select>
+       <div id="form-divider"></div>
+       <input class="single-form comments-others" type="text" name="name" value="<%= COMMENTS BY OTHERS %>"/>
     </section>
-  </main>
-</body>
+  </div>
 </html>
 
-<!-- <div class="one">
-  <div>
-  <fieldset>
-    <label for="url">url:</label>
-    <div id="form-divider"></div>
-    <input id="url" type="text" name="name" value="<%= user.name %>"/>
-  </fieldset>
-  </div>
-  <label for="url">url:</label>
-    <div id="form-divider"></div>
-    <input id="url" type="text" name="name" value="<%= user.name %>"/>
-  <div>
-  </div>
-</div> -->
