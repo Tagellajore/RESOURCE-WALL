@@ -10,16 +10,12 @@
   <div>
   <% resources.forEach((resource) => { %>
       <p>Title <%= resource.title%></p>
-      <p>url <%= resource.url%></p>
-      <p>description <%= resource.description%></p>
       <p>Cover <%= resource.url_cover_photo%></p>
       <%})%>
     </div>
     <div>
       <% likes.forEach((like) => { %>
         <p>Title <%= like.title%></p>
-        <p>url <%= like.url%></p>
-        <p>description <%= like.description%></p>
         <p>Cover <%= like.url_cover_photo%></p>
       <% })%>
     </div>
