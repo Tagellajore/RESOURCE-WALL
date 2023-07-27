@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // update user info 
-router.post('/users/edit/:id', async (req, res) => {
+router.post('/edit/:id', async (req, res) => {
   const { user_id } = req.session;
   if (!user_id) {
     return res.status(400).send("You need to be logged in!");
@@ -61,7 +61,7 @@ router.post('/users/edit/:id', async (req, res) => {
       `UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4;`,
       [name, email, password, id]
     );
-    return res.redirect(`/users/${id}`)
+    return res.redirect(`/api/users/${id}`)
   } catch (error) {
     return res.status(500).send("Internal server error")
   }
