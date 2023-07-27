@@ -52,8 +52,8 @@ router.get('/myresources', async (req, res) => {
         return res.redirect("/")
       }
 
-      const resources = await db.query(`SELECT * FROM resources WHERE user_id = $1;`, [validUser.rows[0].id]);
-      const likes = await db.query(`SELECT * FROM likes JOIN resources ON resource_id = resources.id WHERE likes.user_id = $1`, [ user_id ]);
+      const resources = await db.query(`SELECT * FROM resources WHERE user_id = $1 limit 3;`, [validUser.rows[0].id]);
+      const likes = await db.query(`SELECT * FROM likes JOIN resources ON resource_id = resources.id WHERE likes.user_id = $1 limit 3;`, [ user_id ]);
       const templateVars = {
          user: validUser.rows[0],
          resources: resources.rows,
