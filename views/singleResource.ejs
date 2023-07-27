@@ -18,19 +18,21 @@
   <div class="one">
     <div class="image-center">
     <fieldset>
-      <img src="https://images.squarespace-cdn.com/content/v1/5538679ce4b07179e5b8a295/1675326874278-2BNDO82OTLMHBNJBZVC7/mexico2022-20220831-A51A6855.jpg?format=2500w">
+      <img src="<%= singleResource.url_cover_photo %>">
     </fieldset>
     </div>
     <section>
        <div id="form-divider"></div>
-       <input class="single-form" type="text" name="name" value=" NAME "/>
+       <input class="single-form" type="text" name="name" value=" <%=  singleResource.title%>  "/>
        <button id="margin-like" type="submit">Like</button>
        <div id="form-divider"></div>
-       <input class="single-form" type="text" name="name" value="URL: <%= URL %>"/>
+       <input class="single-form" type="text" name="name" value="URL: <%=  singleResource.url %>"/>
        <div id="form-divider"></div>
-       <input class="single-form" type="text" name="name" value="<%= DESCRIPTION %>"/>
+       <input class="single-form" type="text" name="name" value="<%=  singleResource.description %>"/>
        <div id="form-divider"></div>
-       <input class="single-form comments" type="text" name="name" value="<%= COMMENTS %>"/>
+
+       <input class="single-form comments" type="text" name="name" value=""/>
+       <button type="submit">Comment</button>
        <label for="select-category">Rating</label>
                <select id="select-dropdown" name="select-dropdown">
                  <option value="1">1</option>
@@ -40,7 +42,6 @@
                  <option value="5">5</option>
                </select>
        <div id="form-divider"></div>
-       <input class="single-form comments-others" type="text" name="name" value="<%= COMMENTS BY OTHERS %>"/>
     </section>
   </div>
 </html>
