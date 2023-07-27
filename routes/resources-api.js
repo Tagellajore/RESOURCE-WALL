@@ -89,6 +89,8 @@ try {
   }
 });
 
+
+
 // Get a single resource
 router.get('/:id', async (req, res) => {
   const { user_id } = req.session;
@@ -129,7 +131,7 @@ router.post('/new', async (req, res) => {
     const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id])
 
     if (!validUser) {
-       return res.redirect('/');
+       return res.send('you are not allowed to be here');
     }
   const { title, url, url_cover_photo, description, categoryId} = req.body;
 
@@ -156,7 +158,7 @@ router.post('/category', async (req, res) => {
   try {
   const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); //
   if(!validUser) {
-    return res.redirect("/")
+    return res.send("You are not allowed to be here")
   }
 
   const resources = await db.query(`SELECT * FROM resources Where category_id =$1;`, [id]);
@@ -173,5 +175,56 @@ router.post('/category', async (req, res) => {
 }
 });
 
+// Adding feedbacks
+router.post('/feedbacks', async (req, res) => {
+  const resource_id = req.params.id;
+  const { user_id } = req.session;
+  if (!user_id) {
+    return res.status(400).send('You need to be logged in')
+  }
+
+  try {
+    const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id])
+
+    if (!validUser) {
+       return res.send('You are not allowed to be here');
+    }
+
+    const { comment, rating } = req.body;
+    console.log(req.body);
+    if (!comment || !rating) {
+      return res.status(400)
+      .send("You need to fill all fields");
+    }
+    await db.query(`INSERT INTO feedbacks (comment, rating, user_id, resource_id) VALUES ($1, $2, $3, $4) RETURNING *;`,
+    [comment, rating, user_id, resource_id]);
+    return res.redirect(`/api/resources/${resource_id}`);
+  } catch (error) {
+    return res.status(400).send({ message: error.message });
+  }
+})
+
+// Adding likes
+router.post('/likes', async (req, res) => {
+  const { resource_id } = req.params;
+  const { user_id } = req.session;
+  if (!user_id) {
+    return res.status(400).send('You need to be logged in')
+  }
+
+  try {
+    const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id])
+    
+    if (!validUser) {
+       return res.send('You are not allowed to be here');
+    }
+
+    await db.query(`INSERT INTO likes (user_id, resource_id) VALUES ($1, $2) RETURNING *;`,
+    [user_id, resource_id]);
+    return res.redirect("/api/resources/myresources");
+  } catch (error) {
+    return res.status(400).send({ message: error.message });
+  }
+})
 
 module.exports = router;
