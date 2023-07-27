@@ -118,6 +118,7 @@ router.get('/:id', async (req, res) => {
 // Adding new resources
 router.post('/new', async (req, res) => {
   console.log(req.body);
+  const id = req.body.categoryId;
   // const title = req.body.title;
   const { user_id } = req.session;
   if (!user_id) {
@@ -130,15 +131,15 @@ router.post('/new', async (req, res) => {
     if (!validUser) {
        return res.redirect('/');
     }
-  const { title, url, url_cover_photo, description } = req.body;
+  const { title, url, url_cover_photo, description, categoryId} = req.body;
 
   if (!title || !url || !url_cover_photo || !description) {
     return res.status(400)
     .send("You need to fill title, category, url, url_cover_photo or description fields");
   }
   await db.query(`INSERT INTO resources (title, url, url_cover_photo, description, user_id, category_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
-  [title, url, url_cover_photo, description, user_id, 2]);
-  return res.redirect("/");
+  [title, url, url_cover_photo, description, user_id, categoryId]);
+  return res.redirect("/api/resources");
   } catch (error) {
     return res.status(400).send( { message: error.message } )
   }
@@ -164,7 +165,7 @@ router.post('/category', async (req, res) => {
    user: validUser.rows[0],
    resources: resources.rows
   };
-  console.log(templateVars);
+  // console.log(templateVars);
   return res.render("index", templateVars);
   // console.log(id);
   }catch (error) {

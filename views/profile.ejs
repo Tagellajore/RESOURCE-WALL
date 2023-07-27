@@ -24,7 +24,7 @@
     <section id="section-container">
       <article>
         <h2>My Profile</h2>
-        <form id="profile-form" method="POST" action="/api/users/<%= user.id %>">
+        <form id="profile-form" method="POST" action="/api/users/edit/<%= user.id %>">
           <fieldset>
             <label for="name">Name:</label>
             <div id="form-divider"></div>
@@ -41,7 +41,7 @@
             <input id="password" type="text" name="password" />
           </fieldset>
           <div class="button">
-            <button id="margin-update" type="submit">Update</button>
+              <button id="margin-update" type="submit">Update</button>
           </div>
         </form>
       </article>
