@@ -25,14 +25,15 @@
       <div id="form-divider"></div>
       <input class="single-form" type="text" name="name" value=" <%=  singleResource.title%>  "/>
       <div id="form-divider"></div>
+      <p>URL: <a href="<%= singleResource.url %>" target="_blank"><%= singleResource.url %></a></p>
       <input class="single-form" type="text" name="name" value="URL: <%=  singleResource.url %>"/>
       <div id="form-divider"></div>
       <input class="single-form" type="text" name="name" value="<%=  singleResource.description %>"/>
       <div id="form-divider"></div>
-      <input class="single-form comments" type="text" name="name" placeholder="Leave Comments"/>
-      <form class ="comments-rates" method="POST" action="api">
-        <label for="select-category">Rating</label>
-          <select id="select-dropdown" name="select-dropdown">
+      <form class ="comments-rates" method="POST" action="/api/resources/feedbacks">
+        <input class="single-form comments" type="text" name="comment" placeholder="Leave Comments"/>
+        <label for="select-category" >Rating</label>
+          <select id="select-dropdown" name="rating">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -42,7 +43,7 @@
         <div id="form-divider"></div>
         <button class="padding-submit" type="submit">Submit</button>
       </form>
-      <form class="like" method="POST" action="api">
+      <form class="like" method="POST" action="/api/resources/likes">
         <button id="margin-like" type="submit">❤️</button>
       </form>
     </section>
