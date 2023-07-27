@@ -17,31 +17,34 @@
   <%- include('partials/_header.ejs') %>
   <div class="one">
     <div class="image-center">
-    <fieldset>
+    <fieldset class="image-border">
       <img src="<%= singleResource.url_cover_photo %>">
     </fieldset>
     </div>
     <section>
-       <div id="form-divider"></div>
-       <input class="single-form" type="text" name="name" value=" <%=  singleResource.title%>  "/>
-       <button id="margin-like" type="submit">💌</button>
-       <div id="form-divider"></div>
-       <input class="single-form" type="text" name="name" value="URL: <%=  singleResource.url %>"/>
-       <div id="form-divider"></div>
-       <input class="single-form" type="text" name="name" value="<%=  singleResource.description %>"/>
-       <div id="form-divider"></div>
-
-       <input class="single-form comments" type="text" name="name" value=""/>
-       <button type="submit">Comment</button>
-       <label for="select-category">Rating</label>
-               <select id="select-dropdown" name="select-dropdown">
-                 <option value="1">1</option>
-                 <option value="2">2</option>
-                 <option value="3">3</option>
-                 <option value="4">4</option>
-                 <option value="5">5</option>
-               </select>
-       <div id="form-divider"></div>
+      <div id="form-divider"></div>
+      <input class="single-form" type="text" name="name" value=" <%=  singleResource.title%>  "/>
+      <div id="form-divider"></div>
+      <input class="single-form" type="text" name="name" value="URL: <%=  singleResource.url %>"/>
+      <div id="form-divider"></div>
+      <input class="single-form" type="text" name="name" value="<%=  singleResource.description %>"/>
+      <div id="form-divider"></div>
+      <input class="single-form comments" type="text" name="name" placeholder="Leave Comments"/>
+      <form class ="comments-rates" method="POST" action="api">
+        <label for="select-category">Rating</label>
+          <select id="select-dropdown" name="select-dropdown">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        <div id="form-divider"></div>
+        <button class="padding-submit" type="submit">Submit</button>
+      </form>
+      <form class="like" method="POST" action="api">
+        <button id="margin-like" type="submit">❤️</button>
+      </form>
     </section>
   </div>
 </html>
