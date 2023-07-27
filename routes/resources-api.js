@@ -117,8 +117,8 @@ router.get('/:id', async (req, res) => {
 
 // Adding new resources
 router.post('/new', async (req, res) => {
-  console.log(req.body);
-  const id = req.body.categoryId;
+  // console.log(req.body);
+  // const id = req.body.categoryId;
   // const title = req.body.title;
   const { user_id } = req.session;
   if (!user_id) {
