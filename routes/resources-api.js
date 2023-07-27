@@ -108,9 +108,10 @@ router.get('/:id', async (req, res) => {
       const singleResource = await db.query(`SELECT * FROM resources WHERE id = $1`, [rId])
       const templateVars = {
         user: validUser.rows[0],
-        singleResource: singleResource.rows[0]
+        singleResource: singleResource.rows[0],
+        resourceid: rId
       };
-      console.log(templateVars)
+      //console.log(templateVars)
       return res.render('singleResource', templateVars);
   } catch (error) {
     return res.status(500).send("Internal server error")
@@ -176,8 +177,7 @@ router.post('/category', async (req, res) => {
 });
 
 // Adding feedbacks
-router.post('/feedbacks', async (req, res) => {
-  const resource_id = req.params.id;
+router.post('/feedbacks', async (req, res) => { 
   const { user_id } = req.session;
   if (!user_id) {
     return res.status(400).send('You need to be logged in')
@@ -189,7 +189,7 @@ router.post('/feedbacks', async (req, res) => {
     if (!validUser) {
        return res.send('You are not allowed to be here');
     }
-
+    
     const { comment, rating } = req.body;
     console.log(req.body);
     if (!comment || !rating) {
@@ -197,8 +197,8 @@ router.post('/feedbacks', async (req, res) => {
       .send("You need to fill all fields");
     }
     await db.query(`INSERT INTO feedbacks (comment, rating, user_id, resource_id) VALUES ($1, $2, $3, $4) RETURNING *;`,
-    [comment, rating, user_id, resource_id]);
-    return res.redirect(`/api/resources/${resource_id}`);
+    [comment, rating, user_id, req.body.resourceid]);
+    return res.redirect(`/api/resources/${req.body.resourceid}`);
   } catch (error) {
     return res.status(400).send({ message: error.message });
   }
@@ -206,7 +206,6 @@ router.post('/feedbacks', async (req, res) => {
 
 // Adding likes
 router.post('/likes', async (req, res) => {
-  const { resource_id } = req.params;
   const { user_id } = req.session;
   if (!user_id) {
     return res.status(400).send('You need to be logged in')
