@@ -5,6 +5,10 @@
 
 }
 
+.image-border {
+  border-color: transparent;
+}
+
 .image-center {
   align-self: center;
 }
@@ -23,8 +27,29 @@ section {
 padding-bottom: 10px;
 }
 
+.comments-rates {
+  display: flex;
+  justify-content: end;
+  width: 500px;
+  padding-top: 10px;
+}
+
+.padding-submit {
+  margin-left: 20px;
+}
+
+.like {
+  display: flex;
+  justify-content: end;
+  width: 500px;
+}
+
+#margin-like {
+  border-color: transparent;
+}
+
 .single-form {
-  width: 400px;
+  width: 500px;
   padding-bottom: 10px;
 }
 
