@@ -96,10 +96,16 @@ router.get('/:id', async (req, res) => {
     return res.send("You are not allowed to access this resource");
   }
 
+  const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); //
+  if(!validUser) {
+    return res.redirect("You are not allowed to be here")
+  }
+
   const rId = req.params.id
     try {
       const singleResource = await db.query(`SELECT * FROM resources WHERE id = $1`, [rId])
       const templateVars = {
+        user: validUser.rows[0],
         singleResource: singleResource.rows[0]
       };
       console.log(templateVars)
@@ -160,7 +166,7 @@ router.post('/category', async (req, res) => {
   };
   console.log(templateVars);
   return res.render("index", templateVars);
-  console.log(id);
+  // console.log(id);
   }catch (error) {
     return res.status(400).send({ message: error.message });
 }
