@@ -219,8 +219,8 @@ router.post('/likes', async (req, res) => {
     }
 
     await db.query(`INSERT INTO likes (user_id, resource_id) VALUES ($1, $2) RETURNING *;`,
-    [user_id, resource_id]);
-    return res.redirect("/api/resources/myresources");
+    [user_id, req.body.resourceid]);
+    return res.redirect(`/api/resources/${req.body.resourceid}`);
   } catch (error) {
     return res.status(400).send({ message: error.message });
   }
