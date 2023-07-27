@@ -23,12 +23,12 @@
     </div>
     <section>
       <div id="form-divider"></div>
-      <input class="single-form" type="text" name="name" value=" <%=  singleResource.title%>  "/>
+      <input class="single-form" type="text" name="title" value=" <%=  singleResource.title%>  "/>
       <div id="form-divider"></div>
       <p>URL: <a href="<%= singleResource.url %>" target="_blank"><%= singleResource.url %></a></p>
-      <input class="single-form" type="text" name="name" value="URL: <%=  singleResource.url %>"/>
+      <input class="single-form" type="text" name="url" value="URL: <%=  singleResource.url %>"/>
       <div id="form-divider"></div>
-      <input class="single-form" type="text" name="name" value="<%=  singleResource.description %>"/>
+      <input class="single-form" type="text" name="description" value="<%=  singleResource.description %>"/>
       <div id="form-divider"></div>
       <form class ="comments-rates" method="POST" action="/api/resources/feedbacks">
         <input class="single-form comments" type="text" name="comment" placeholder="Leave Comments"/>
@@ -45,6 +45,7 @@
         <button class="padding-submit" type="submit">Submit</button>
       </form>
       <form class="like" method="POST" action="/api/resources/likes">
+        <input type="hidden" value="<%=resourceid%>" name="resourceid"/>
         <button id="margin-like" type="submit">❤️</button>
       </form>
     </section>
