@@ -100,17 +100,25 @@ router.get('/:id', async (req, res) => {
 
   const validUser = await db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]); //
   if(!validUser) {
-    return res.redirect("You are not allowed to be here")
+    return res.send("You are not allowed to be here")
+  }
+  
+  const rId = req.params.id
+
+  const feedbacks = await db.query(`SELECT * FROM feedbacks WHERE resource_id = $1 ORDER BY id DESC;`, [rId]); //
+  if(!feedbacks) {
+    return res.send("No feedbacks found!")
   }
 
-  const rId = req.params.id
     try {
       const singleResource = await db.query(`SELECT * FROM resources WHERE id = $1`, [rId])
       const templateVars = {
         user: validUser.rows[0],
         singleResource: singleResource.rows[0],
-        resourceid: rId
+        resourceid: rId,
+        feedbacks: feedbacks.rows
       };
+      console.log(feedbacks.rows)
       //console.log(templateVars)
       return res.render('singleResource', templateVars);
   } catch (error) {
