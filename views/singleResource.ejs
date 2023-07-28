@@ -48,6 +48,7 @@
         <p>Comments</p>
         <% feedbacks.forEach((feedback) => { %>
           <p><%= feedback.comment %></p>
+          <p><%= feedback.rating %></p>
         <% }) %>
       </div>
       <form class="like" method="POST" action="/api/resources/likes">

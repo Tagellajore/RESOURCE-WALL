@@ -20,7 +20,7 @@
     <% resources.forEach((resource) => { %>
       <div id="me">
         <img src="<%= resource.url_cover_photo %>">
-        <p><%= resource.title %></p>
+        <a class="item-title" href="/api/resources/<%= resource.id %>"><%= resource.title %></a>
       </div>
     <%})%>
     </div>
@@ -29,7 +29,7 @@
     <% likes.forEach((like) => { %>
       <div id="me">
         <img src="<%= like.url_cover_photo%>">
-        <p><%= like.title%></p>
+        <a class="item-title" href="/api/resources/<%= like.id %>"><%= like.title %></a>
       </div>
     <% })%>
     </div>
