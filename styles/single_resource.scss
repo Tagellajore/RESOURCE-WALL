@@ -1,7 +1,11 @@
+body {
+  height: 100vh;
+}
+
 .one {
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 80px;
 
 }
 
@@ -23,19 +27,88 @@ section {
   padding-left: 40px;
 }
 
-#form-divider {
-padding-bottom: 10px;
+.url {
+  background-color: white;
+  width: 500px;
+  height: 30px;
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-left: 15px;
+}
+
+.description {
+  word-wrap: break-word;
+  height: 80px;
+  padding-left: 15px;
+}
+
+.comment-rating {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  padding-top: 20px;
 }
 
 .comments-rates {
   display: flex;
-  justify-content: end;
+  flex-direction: column;
   width: 500px;
   padding-top: 10px;
 }
 
 .padding-submit {
   margin-left: 20px;
+  border-radius: 15px;
+  border-color: transparent;
+  background-color: rgb(9, 166, 166);
+  color: white;
+}
+
+.other-users {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.other-comments {
+  background-color: white;
+  border-radius: 15px;
+  height: 40px;
+  width: 450px;
+  padding-left: 10px;
+  padding-top: 10px;
+  margin-top: -5px;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+#select-dropdown {
+  width: 35px;
+  align-self: center;
+  margin-top: 10px;
+}
+
+.other-ratings {
+  background-color: white;
+  border-radius: 15px;
+  height: 25px;
+  width: 30px;
+  text-align: center;
+  padding-top: 4px;
+  margin-top: -1.5px;
+}
+
+.others-background {
+  background-color: white;
+  border-radius: 15px;
 }
 
 .like {
@@ -46,15 +119,33 @@ padding-bottom: 10px;
 
 #margin-like {
   border-color: transparent;
+  background-color: pink;
+}
+
+#margin-like:hover {
+  box-shadow: 6px 6px #cd67a0;
 }
 
 .single-form {
   width: 500px;
   padding-bottom: 10px;
+  background-color: white;
+  border-radius: 15px;
+  padding-top: 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.submit-end {
+  align-self: end;
+  padding-top: 10px;
 }
 
 .comments {
   padding-bottom: 50px;
+  padding-left: 15px;
 }
 
 .comments-others {
