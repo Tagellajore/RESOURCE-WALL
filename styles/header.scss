@@ -3,8 +3,8 @@ nav {
   justify-content: space-between;
   height: 100px;
   width: 100vw;
-  background-color: #43b3ae;
-  color: black;
+  background-color: #25908bcf;
+  color: #9f9ea;
   padding-top: 35px;
   font-size: 20px;
 }
@@ -13,9 +13,30 @@ nav {
   color: white;
   font-size: 30px;
   padding-left: 30px;
+  text-decoration: none;
 }
 
 .nav-items a {
-  color: black;
+  color: white;
   padding-right: 18px;
+}
+
+#search-dropdown {
+  border-radius: 10px;
+  width: 200px;
+  border-color: transparent;
+}
+
+.header-button {
+  border-radius: 10px;
+  border-color: transparent;
+  background-color: rgb(255, 255, 255);
+}
+
+.nav-font {
+  text-decoration: none;
+}
+
+.nav-font:hover {
+  color: rgb(64, 222, 169);
 }
