@@ -44,6 +44,12 @@
         <input type="hidden" value="<%=resourceid%>" name="resourceid"/>
         <button class="padding-submit" type="submit">Submit</button>
       </form>
+      <div>
+        <p>Comments</p>
+        <% feedbacks.forEach((feedback) => { %>
+          <p><%= feedback.comment %></p>
+        <% }) %>
+      </div>
       <form class="like" method="POST" action="/api/resources/likes">
         <input type="hidden" value="<%=resourceid%>" name="resourceid"/>
         <button id="margin-like" type="submit">❤️</button>
