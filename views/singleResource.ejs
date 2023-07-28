@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/styles/header.css" />
   <link rel="stylesheet" href="/styles/single_resource.css" />
 
-  <title>Document</title>
+  <title>Resource Wall</title>
 </head>
 <body>
   <%- include('partials/_header.ejs') %>
@@ -23,33 +23,45 @@
     </div>
     <section>
       <div id="form-divider"></div>
-      <input class="single-form" type="text" name="title" value=" <%=  singleResource.title%>  "/>
+      <p class="single-form text-center" type="text" name="title"><%=  singleResource.title%></p>
       <div id="form-divider"></div>
-      <p>URL: <a href="<%= singleResource.url %>" target="_blank"><%= singleResource.url %></a></p>
-      <input class="single-form" type="text" name="url" value="URL: <%=  singleResource.url %>"/>
+      <p class="url">URL: <a href="<%= singleResource.url %>" target="_blank"><%= singleResource.url %></a></p>
       <div id="form-divider"></div>
-      <input class="single-form" type="text" name="description" value="<%=  singleResource.description %>"/>
+      <p class="single-form description" type="text" name="description"><%=  singleResource.description %></p>
       <div id="form-divider"></div>
       <form class ="comments-rates" method="POST" action="/api/resources/feedbacks">
-        <input class="single-form comments" type="text" name="comment" placeholder="Leave Comments"/>
-        <label for="select-category" >Rating</label>
-          <select id="select-dropdown" name="rating">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        <div id="form-divider"></div>
-        <input type="hidden" value="<%=resourceid%>" name="resourceid"/>
-        <button class="padding-submit" type="submit">Submit</button>
+        <div class="row">
+          <textarea class="single-form comments" type="text" name="comment" placeholder="Leave Comments"></textarea>
+          <div class="column">
+            <label for="select-category" >Rating</label>
+              <select id="select-dropdown" name="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+          </div>
+        </div>
+        <!-- <div id="form-divider"></div> -->
+        <div class="submit-end">
+          <input type="hidden" value="<%=resourceid%>" name="resourceid"/>
+          <button class="padding-submit" type="submit">Submit</button>
+        </div>
       </form>
-      <div>
-        <p>Comments</p>
-        <% feedbacks.forEach((feedback) => { %>
-          <p><%= feedback.comment %></p>
-          <p><%= feedback.rating %></p>
-        <% }) %>
+      <div class="comment-layout">
+        <div class="comment-rating">
+          <p>Comments</p>
+          <p>Rating</p>
+        </div>
+          <div>
+            <% feedbacks.forEach((feedback) => { %>
+            <div class="other-users">
+            <p class="other-comments"><%= feedback.comment %></p>
+            <p class="other-ratings"><%= feedback.rating %></p>
+            </div>
+            <% }) %>
+          </div>
       </div>
       <form class="like" method="POST" action="/api/resources/likes">
         <input type="hidden" value="<%=resourceid%>" name="resourceid"/>
