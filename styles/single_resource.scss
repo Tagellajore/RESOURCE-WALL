@@ -5,8 +5,8 @@ body {
 .one {
   display: flex;
   justify-content: center;
-  padding-top: 80px;
-
+  padding-top: 40px;
+  height: 100vh;
 }
 
 .image-border {
@@ -36,6 +36,15 @@ section {
   padding-left: 15px;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #25908bcf;
+  color: white;
+}
+
 .description {
   word-wrap: break-word;
   height: 80px;
@@ -47,6 +56,8 @@ section {
   justify-content: space-between;
   width: 500px;
   padding-top: 20px;
+  color: teal;
+  font-weight: 600;
 }
 
 .comments-rates {
@@ -120,6 +131,7 @@ section {
 #margin-like {
   border-color: transparent;
   background-color: pink;
+  margin-bottom: 50px;
 }
 
 #margin-like:hover {
@@ -128,7 +140,6 @@ section {
 
 .single-form {
   width: 500px;
-  padding-bottom: 10px;
   background-color: white;
   border-radius: 15px;
   padding-top: 10px;
@@ -136,6 +147,10 @@ section {
 
 .text-center {
   text-align: center;
+  background-color: transparent;
+  font-size: 30px;
+  font-weight: bold;
+  color: teal;
 }
 
 .submit-end {

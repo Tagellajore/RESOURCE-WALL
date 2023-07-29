@@ -16,6 +16,15 @@ nav {
   text-decoration: none;
 }
 
+.title:hover {
+  color: rgb(91, 240, 235);
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-style: solid;
+  transition:  color 0.5s ease-in;
+}
+
 .nav-items a {
   color: white;
   padding-right: 18px;
@@ -33,10 +42,19 @@ nav {
   background-color: rgb(255, 255, 255);
 }
 
+.header-button:hover {
+  color: rgb(24, 192, 192);
+}
+
 .nav-font {
   text-decoration: none;
 }
 
 .nav-font:hover {
-  color: rgb(64, 222, 169);
+  color: rgb(91, 240, 235);
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-style: solid;
+  transition:  color 0.5s ease-in;
 }

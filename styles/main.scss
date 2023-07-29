@@ -46,4 +46,11 @@ body {
   color: teal;
   font-weight: bold;
   font-size: 20px;
+  text-decoration: none;
 }
+
+.item-title:hover {
+  background-color: #25908bcf;
+  color: white;
+}
+

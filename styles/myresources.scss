@@ -9,6 +9,7 @@
 .layout{
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 50px;
 }
 
 #me {
@@ -27,10 +28,7 @@
 #me img {
   width: 200px;
   height: 180px;
-}
-
-#me a {
-  padding-left: 20px;
+  margin-right: 20px;
 }
 
 h1 {
